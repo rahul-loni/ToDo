@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:todo/constant/colors.dart';
 
+import '../model/todo.dart';
 import '../widgets/todo_item.dart';
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
+  MyHomePage({super.key});
+  final todosList = ToDo.todoList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,14 +63,10 @@ class MyHomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  TodoItems(),
-                  TodoItems(),
-                  TodoItems(),
-                  TodoItems(),
-                  TodoItems(),
-                  TodoItems(),
-                  TodoItems(),
-                  TodoItems(),
+                  for (ToDo todoo in todosList)
+                    TodoItems(
+                      todo: todoo,
+                    ),
                 ],
               ),
             ),
@@ -85,6 +82,12 @@ class MyHomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+void _deleteToDoItem(String id) {
+  setState(() {
+    todosList.removeWhere((item) => item.id == id);
+  });
 }
 
 Widget searchBox() {

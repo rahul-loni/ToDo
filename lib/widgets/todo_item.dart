@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../constant/colors.dart';
+import '../model/todo.dart';
 
 class TodoItems extends StatelessWidget {
-  const TodoItems({super.key});
+  final ToDo todo;
+  const TodoItems({
+    super.key,
+    required this.todo,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class TodoItems extends StatelessWidget {
           color: tdBlue,
         ),
         title: Text(
-          'check Mail',
+          todo.todoText!,
           style: TextStyle(
             fontSize: 16.0,
             color: tdBlack,
@@ -44,7 +49,8 @@ class TodoItems extends StatelessWidget {
             color: Colors.white,
             iconSize: 18.0,
             onPressed: () {
-              print("click to delete button ");
+              // print("click to delete button ");
+              onDeleteItem(todo.id);
             },
             icon: Icon(Icons.delete),
           ),
